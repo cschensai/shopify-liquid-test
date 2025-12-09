@@ -1,0 +1,93 @@
+<h2>44. string</h2>
+<p>
+  {{ request.origin | append: '-cs-test-dev' }}
+</p>
+<p>
+  {{ request.origin | prepend: 'cs-test-dev-' }}
+</p>
+<p>
+  {{ 'b25lIHR3byB0aHJlZQ==' | base64_decode }}
+  {{ 'one two three' | base64_encode }}
+</p>
+
+<p>
+  {{ '<p>Text to be escaped.</p>' | escape }}
+</p>
+
+<p>
+  {{ "&lt;p&gt;Text to be escaped.&lt;/p&gt;" | escape }}
+
+{{ "&lt;p&gt;Text to be escaped.&lt;/p&gt;" | escape_once }}
+
+{{ "&lt;p&gt;Text to be escaped.&lt;/p&gt; & some additional text" | escape_once }}
+</p>
+
+<p>
+  {%- assign secret_potion = 'Polyjuice' | hmac_sha1: 'Polina' -%}
+
+My secret potion: {{ secret_potion }}
+</p>
+
+<p>
+  {%- assign secret_potion = 'Polyjuice' | hmac_sha256: 'Polina' -%}
+
+My secret potion: {{ secret_potion }}
+</p>
+<p>
+  {{ 'cs-test-dev'  | replace: '-', ' ' }}
+</p>
+<p>
+  {{ '<p>Text to be stripped.</p><h1>Text to be stripped.</h1>' | strip_html }}
+</p>
+<p>
+  {{ 'test%40test.com' | url_decode }}
+  {{ 'test@test.com' | url_encode }}
+  {{ '<p>Health & Love potions</p>' | url_escape }}
+  {{ '<p>Health & Love potions</p>' | url_param_escape }}
+</p>
+<h2>45. object</h2>
+<p>
+  <span>所有国家/地区选项标签</span>
+  <select name="country">
+  {{ all_country_option_tags }}
+</select>
+</p>
+
+<h2>46. content_for</h2>
+
+<h2>47. localization</h2>
+<p>
+  {% for country in localization.available_countries -%}
+    {{ country }}
+  {%- endfor %}
+</p>
+<p>
+  {{ localization.country | image_url: width: 32 | image_tag }}
+</p>
+<p>
+  <select name="country">
+  {{ country_option_tags }}
+</select>
+</p>
+<p>
+  {{ powered_by_link }}
+</p>
+<h2>48. shop</h2>
+<p>
+  {{  shop.currency |  prepend: '该商店接受的货币：' }}
+</p>
+<p>
+
+<ul>
+{%- for policy in shop.policies %}
+  <li>{{ policy.title }}</li>
+{%- endfor %}
+</ul>
+</p>
+
+<h2>49. video</h2>
+<p>
+  <video playsinline="playsinline" preload="metadata" aria-label="Potion beats" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_small.jpg?v=1655255324"><source src="//polinas-potent-potions.myshopify.com/cdn/shop/videos/c/vp/4edc28a708b7405093a927cebe794f1a/4edc28a708b7405093a927cebe794f1a.HD-1080p-7.2Mbps.mp4?v=0" type="video/mp4"><img src="//polinas-potent-potions.myshopify.com/cdn/shop/products/4edc28a708b7405093a927cebe794f1a.thumbnail.0000000_small.jpg?v=1655255324"></video>
+</p>
+
+<h2>50. 其它</h2>

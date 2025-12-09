@@ -33,7 +33,7 @@
           "type": "text",
           "name": "自定义内容",
           "settings": {
-            "text": "<p>这是你的自定义内容，可以在这里添加任何111 HTML</p>",
+            "text": "<p>这是你的自定义内容，可以在这里添加任何 HTML{{ closest.page.content }}</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",

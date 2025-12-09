@@ -1,0 +1,489 @@
+{% layout 'theme' %}
+<h1>Liquid学习</h1>
+<h2>1. Title、Meta</h2>
+<title>{{ page_title   }}</title>
+<meta name="description" content="{{ page_description | truncate: 150 }}">
+
+<h2>2.if逻辑</h2>
+{% if product.available %}
+  <p>Product is available</p>
+{% else %}
+  <p>Product is not available</p>
+{% endif %}
+
+<h2>3.for循环</h2>
+{% assign numbers = '1,2,3,4,5' | split: ',' %}
+<p>
+  {% for item in numbers limit:4 %}
+    <span>{{ item }}</span>
+  {% endfor %}
+</p>
+<p>
+  {% for item in (1..10) limit:8 %}
+    <span>{{ item }}</span>
+  {% endfor %}
+</p>
+
+<h2>4.过滤器</h2>
+<p>{{ 'Hello, World!' | upcase }}</p>
+<p>{{ 'Hello, World!' | downcase }}</p>
+<p>{{ 'Hello, World!' | capitalize }}</p>
+<p>{{ 'Hello, World!' | truncate: 6 }}</p>
+<p>{{ 'Hello, World!' | remove: 'World' }}</p>
+<p>{{ 'Hello, World!' | replace: 'World', 'Liquid' }}</p>
+<p>{{ 'Hello, World!' | upcase |  remove: 'HELLO'  }}</p>
+
+<h2>5. 创建变量</h2>
+{% assign name = 'John' %}
+<p>{{ name }}</p>
+
+<h2>6. 对象句柄</h2>
+<p>About us page URL: {{ pages['about-us'].url }}</p>
+<p>Enable product suggestions: {{ settings.predictive_search_enabled }}</p>
+
+<h2>7. 运算符号</h2>
+{% assign a = 'cs test dev' %}
+{% if a contains 'test' %}
+  <p>a contains test</p>
+{% endif %}
+{% if a == 'cs test dev' %}
+  <p>a is equal to cs test dev</p>
+{% endif %}
+{% if a != 'cs' and 2 >=0 %}
+  <p>test != and logic</p>
+{% endif %}
+
+{% assign b = '1, 2, 3, 4, 5' | split: ',' %}
+
+{% if b contains '1' %}
+  <p>b arr contains 1</p>
+{% endif %}
+
+
+<h2>8. 操作顺序</h2>
+<p>
+  {% unless true and false and false or true %}
+    <p>condition is false excute: test unless equal if not true and (false and (false or true))</p>
+  {% endunless %}
+</p>
+
+<h2>9. Types 类型</h2>
+<p>blank: 可用于判断字符串是否为空</p>
+<p>nil: 未定义的值</p>
+<p>empty: 定义但没有值的对象</p>
+<p>
+  {% unless pages.contact == empty %}
+    <p>pages.contact is not empty {{ pages.contact.title }}</p>
+  {% endunless %}
+</p>
+
+<h2>10. 注释</h2>
+<p>
+  {% if settings.featured_potions_title != blank %}
+    {{ settings.featured_potions_title }}
+  {% else %}
+    No value for this setting has been selected.
+  {% endif %}
+</p>
+<p>
+  {% unless pages.recipes == empty %}
+    {{ pages.recipes.content }}
+  {% else %}
+    No page with this handle exists.
+  {% endunless %}
+</p>
+
+<h2>11. 空格控制</h2>
+<p>
+  {%- if true -%} 
+    a contains test
+  {%- endif -%}
+</p>
+
+
+<h2>12. case</h2>
+<p>
+{% case product.type %}
+  {% when 'Health' %}
+    This is a health potion.
+  {% when 'Love' %}
+    This is a love potion.
+  {% else %}
+    This is a potion.
+{% endcase %}
+</p>
+<p>
+{% case "YOUR" %}
+  {% # 多个条件用 or 连接 %}
+  {% when 'Love' or 'Luck' %}
+    This is a love or luck potion.
+  {% when 'Strength','Health' %}
+  {% # 多个条件用 , 连接 %}
+    This is a strength or health potion.
+  {% # 多个条件分支 %}
+  {% when 'MY' %}
+  {% when 'YOUR' %}
+    This is a MY OR YOUR potion.
+  {% else %}
+    This is a potion.
+{% endcase %}
+</p>
+
+<h2>13. else</h2>
+<p>
+  {% if product.available %}
+    This product is available!
+  {% else %}
+    This product is sold out!
+    {% if product.available == blank %}
+      this is blank
+    {% endif %}
+  {% endif %}
+</p>
+
+<h2>14. if</h2>
+<p>
+  {% if product.type == 'Love' %}
+    This is a love potion!
+  {% elsif product.type != 'Health' %}
+    This is a other potion!
+  {% else %}
+    This is a health potion!
+  {% endif %}
+</p>
+
+<h2>15. unless</h2>
+<p>unless: 后面跟的条件如果为false则执行</p>
+<p> 
+  {% unless product.has_only_default_variant %}
+    // Variant selection functionality
+  {% endunless %}
+</p>
+
+<h2>16. form</h2>
+{% form 'activate_customer_password' %}
+  form_content activate_customer_password
+{% endform %}
+
+{% form 'cart', cart %}
+  form_content cart
+{% endform %}
+
+{% form 'contact' %}
+  form content contact
+{% endform %}
+
+{% form 'currency' %}
+  {{ form | currency_selector }}
+{% endform %}
+
+
+{% form 'customer' %}
+  form_content customer
+{% endform %}
+
+<h2>17. style</h2>
+{% style %}
+  p {
+    border: 1px solid gray;
+  }
+{% endstyle %}
+
+
+<h2>18. break</h2>
+<p>
+  {% for item in (1..4) %}
+    {% if item == 3 %}
+      {% break %}
+    {% endif %}
+    {{ item }}
+  {% endfor %}
+</p>
+
+<h2>19. continue</h2>
+<p>
+  {% for item in (1..4) %}
+    {% if item == 3 %}
+      {% continue %}
+    {% endif %}
+    {{ item }}
+  {% endfor %}
+</p>
+
+<h2>20. cycle</h2>
+<p>
+  {% for i in (1..4) %}
+    {% cycle 'one', 'two', 'three' %} {{ i }}
+  {%- endfor %}
+</p>
+<p>
+  {% for i in (1..4) -%}
+    {% cycle 'group_1': 'one', 'two', 'three' %} {{i}}
+  {%- endfor %}
+</p>
+
+<h2>20. for</h2>
+<p>
+  {% for item in (1..5) offset: 2 %}
+    {{ item }}
+  {%- endfor %}
+</p>
+
+<p>
+  {% for item in (1..5) reversed %}
+    {{ item }}
+  {% endfor %}
+</p>
+
+<p>
+  {% for page in pages %}
+    {% if forloop.length > 0 %}
+      {{ page.title }}{% unless forloop.last %}, {% endunless %}
+    {% endif %}
+  {% endfor %}
+</p>
+
+<h2>21. pagination</h2>
+{% comment %} {% paginate collection.products by 5 %}
+  {% for product in collection.products -%}
+    {{ product.title }}
+  {%- endfor %}
+
+  {{- paginate | default_pagination }}
+{% endpaginate %}
+ {% endcomment %}
+ <span class="page current">1</span> <span class="deco">&hellip;</span> <span class="page"><a href="/services/liquid_rendering/resource?page=7" title="">7</a></span> <span class="next"><a href="/services/liquid_rendering/resource?page=2" title="">Next &raquo;</a></span>
+ 
+ <h2>22. tablerow</h2>
+<table>
+  {% tablerow i in (1..3) %}
+    {{ i }}
+  {% endtablerow %}
+</table>
+
+<h2>23. 注释</h2>
+<p>
+  This is a comment 多行注释
+  {% comment %}
+    This is a comment
+  {% endcomment %}
+</p>
+<p>
+  单行内注释
+  {% # content %}
+</p>
+
+<p>
+  liquid 模板内的单行注释
+  {%
+    # This is a comment
+    # across multiple lines
+  %}
+</p>
+
+<h2>24. echo</h2>
+<p>
+  {% echo page.title %}
+  {{ page.title }}
+</p>
+
+
+
+<h2>25. liquid</h2>
+<p>
+  {% liquid
+    # Show a message that's customized to the product type
+  
+    assign product_type = product.type | downcase
+    assign message = ''
+  
+    case product_type
+      when 'health'
+        assign message = 'This is a health potion!'
+      when 'love'
+        assign message = 'This is a love potion!'
+      else
+        assign message = 'This is a potion!'
+    endcase
+    echo message
+  %}
+</p>
+
+<h2>26. raw</h2>
+<p>
+  只输出不接戏渲染
+  {% raw %}
+    {{ 2 | plus: 2 }} equals 4.
+  {% endraw %}
+</p>
+
+<h2>27. include</h2>
+<p>复用代码片段</p>
+{% include 'account-actions' %}
+
+
+<h2>28. content_for</h2>
+<p>content_for 用于在模板中定义内容块，然后在布局中使用 yield 输出</p>
+
+
+<h2>29. javascript</h2>
+
+
+
+<h2>30. layout</h2>
+{% layout 'full-width' %}
+
+<h2>31. render</h2>
+<p>复用/渲染代码片段</p>
+{% render 'account-actions' %}
+
+<h2>32. section</h2>
+{% section 'collection-links' %}
+
+
+<h2>33. sections</h2>
+
+<h2>34. stylesheet</h2>
+
+<h2>35.captcha</h2>
+{%- assign up_title = product.title | upcase -%}
+{%- assign down_title = product.title | downcase -%}
+{%- assign show_up_title = true -%}
+
+{%- capture title -%}
+  {% if show_up_title -%}
+    Upcase title: {{ up_title }}
+  {%- else -%}
+    Downcase title: {{ down_title }}
+  {%- endif %}
+{%- endcapture %}
+
+{{ title }}
+
+<h2>36. decrement</h2>
+<p>默认变量为-1</p>
+{% decrement my_number %}
+{% decrement my_number %}
+{% decrement my_number %}
+
+<h2>37. increment</h2>
+<p>默认变量为0</p>
+{% increment my_number_increment %}
+{% increment my_number_increment %}
+{% increment my_number_increment %}
+
+
+<h2>37. 过滤器</h2>
+
+<h2>38. link_to_type</h2>
+<p>
+  {{ 'Health' | highlight_active_tag | link_to_tag: 'Health' }}
+</p>
+<p>
+  {{ 'Health' | link_to_type }}
+</p>
+<p>
+  {{ "Polina's Potent Potions" | link_to_vendor: class: 'link-class' }}
+</p>
+<p>
+  {{ 'Health' | url_for_type }}
+</p>
+<p>
+{{ "Polina's Potent Potions" | url_for_vendor }}
+</p>
+<p>
+  {{ '#E800B0' | brightness_difference: '#FECEE9' }}
+</p>
+<p>
+  {{ '#D9D8FF' | color_contrast: '#E800B0' }}
+</p>
+<p>{{ '#FFF3F9' | color_difference: '#720955' }}</p>
+<p>
+  {{ 'rgba(234, 90, 185, 0.5)' | color_to_hex }}
+</p>
+<p>{{ '#EA5AB9' | color_to_rgb }}</p>
+<p>
+  {{ '#EA5AB9' | hex_to_rgba }}
+</p>
+<p>
+  {{ '#EA5AB9' | hex_to_rgba: 0.5 }}
+</p>
+
+<h2>39. customer</h2>
+<p>
+  {{ 'Log in' | customer_login_link }}
+</p>
+<p>
+  {{ 'Log out' | customer_logout_link }}
+</p>
+<p>{{ 'Create an account' | customer_register_link }}</p>
+<p>{{ false | default: true, allow_false: true }}</p>
+<p>date: {{ 'now' | date: '%B %d, %Y' }}</p>
+<p>time_tag: {{ 'now' | date: format: 'abbreviated_date' }}</p>
+<p>basic: {{ 'now' | date: format: 'basic' }}</p>
+<p>date: {{ 'now' | date: format: 'date' }}</p>
+<p>date_at_time: {{ 'now' | date: format: 'date_at_time' }}</p>
+<p>default: {{ 'now' | date: format: 'default' }}</p>
+<p>on_date: {{ 'now' | date: format: 'on_date' }}</p>
+<p>long: {{ 'now' | date: format: 'long' }}</p>
+<p>short: {{ 'now' | date: format: 'short' }}</p>
+
+<h2>40. structured_data</h2>
+<script type="application/ld+json">
+  {% comment %} {{ product | structured_data }} {% endcomment %}
+</script>
+
+<h2>41. html</h2>
+<p>
+  {{ "this is a love potion" | highlight: 'is' }}
+</p>
+<p>
+  {{ 'Shopify' | link_to: 'https://www.shopify.com' }}
+</p>
+<p>
+{{ 'collection-1' | placeholder_svg_tag }}
+</p>
+
+<p>
+  {{ 'collection-1' | placeholder_svg_tag: 'cs-test-class' }}
+</p>
+<p>
+  生成script标签的url
+  {{ 'cs-test-dev.js' | asset_url | preload_tag: as: 'script' }}
+  {{ 'cs-test-dev2.js' | asset_url | script_tag }}
+  {{ 'cs-test-dev3.css' | asset_url | stylesheet_tag }}
+  {{ 'cs-test-dev4.css' | asset_url | preload_tag: as: 'style' }}
+</p>
+<p>
+  {{ 'now' | time_tag: '%B %d, %Y', datetime: '%Y-%m-%d' }}
+</p>
+<p>
+  {% form 'currency' %}
+    {{ form | currency_selector }}
+  {% endform %}
+</p>
+
+<h2>42. Math</h2>
+<p>
+  {{ 1.2 | ceil }}
+  {{ -1.2 | ceil }}
+  {{ 1.2 | floor }}
+  {{ -1.2 | floor }}
+  {{ 1.2 | round }}
+  {{ -1.2 | round }}
+  {{ -1.6 | round }}
+  {{ 3.14159 | round: 2 }}
+</p>
+<p>
+<model-viewer src="//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057"></model-viewer>
+<model-viewer interaction-policy="allow-when-focused" src="//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_small.jpg?v=1655189057"></model-viewer>
+<model-viewer src="//polinas-potent-potions.myshopify.com/cdn/shop/3d/models/o/eb9388299ce0557c/WaterBottle.glb?v=0" camera-controls="true" style="--poster-color: transparent;" data-shopify-feature="1.12" alt="Potion bottle" poster="//polinas-potent-potions.myshopify.com/cdn/shop/products/WaterBottle_400x.jpg?v=1655189057"></model-viewer>
+</p>
+
+<h2>43. payment</h2>
+<form method="post" action="/cart/add" id="product_form_6786188247105" accept-charset="UTF-8" class="shopify-product-form" enctype="multipart/form-data"><input type="hidden" name="form_type" value="product" /><input type="hidden" name="utf8" value="✓" />
+  <div data-shopify="payment-button" class="shopify-payment-button"> <shopify-accelerated-checkout recommended="null" fallback="{&quot;name&quot;:&quot;buy_it_now&quot;,&quot;wallet_params&quot;:{}}" access-token="7be588c245f69602e5db198d53fcfde5" buyer-country="CA" buyer-locale="en" buyer-currency="CAD" variant-params="[{&quot;id&quot;:39897499729985,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499762753,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499795521,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499828289,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499861057,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499893825,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499926593,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499959361,&quot;requiresShipping&quot;:true},{&quot;id&quot;:39897499992129,&quot;requiresShipping&quot;:true}]" shop-id="56174706753" > <div class="shopify-payment-button__button" role="button" disabled aria-hidden="true" style="background-color: transparent; border: none"> <div class="shopify-payment-button__skeleton">&nbsp;</div> </div> </shopify-accelerated-checkout> <small id="shopify-buyer-consent" class="hidden" aria-hidden="true" data-consent-type="subscription"> This item is a recurring or deferred purchase. By continuing, I agree to the <span id="shopify-subscription-policy-button">cancellation policy</span> and authorize you to charge my payment method at the prices, frequency and dates listed on this page until my order is fulfilled or I cancel, if permitted. </small> </div>
+<input type="hidden" name="product-id" value="6786188247105" /></form>
+
+{% # string snippets %}
+{% render 'string-demo' %}
