@@ -1,0 +1,28 @@
+{%- comment -%} 渲染 banner 类型 block {%- endcomment -%}
+{% assign align = block.settings.text_alignment | default: 'center' %}
+
+<section class="demo-banner demo-banner--{{ align }}">
+  {% if block.settings.image %}
+    <div class="demo-banner__bg">
+      <img src="{{ block.settings.image | image_url: width: 1600 }}" alt="{{ block.settings.heading | escape }}">
+      {% if block.settings.overlay_opacity > 0 %}
+        <div class="demo-banner__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="demo-banner__content">
+    {% if block.settings.heading %}
+      <h2 class="demo-banner__heading">{{ block.settings.heading }}</h2>
+    {% endif %}
+    {% if block.settings.subheading %}
+      <p class="demo-banner__subheading">{{ block.settings.subheading }}</p>
+    {% endif %}
+
+    {% if block.settings.button_label and block.settings.button_link %}
+      <a href="{{ block.settings.button_link }}" class="demo-banner__button">
+        {{ block.settings.button_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>

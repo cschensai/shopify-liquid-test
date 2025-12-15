@@ -24,7 +24,14 @@
         <p>{{ 'demo_landing.empty_state' | t }}</p>
       {% else  %}
         {% for block in section.blocks %}
-          {% render 'demo-landing', title: block.settings.title, text: block.settings.text %}
+          {% case  block.type %}
+            {% when 'card' %}
+              {% render 'demo-landing-card', title: block.settings.title, text: block.settings.text %}
+            {% when 'banner' %}
+              {% render 'demo-landing-banner', image: block.settings.image, button_label: block.settings.button_label %}
+            {% else %}
+              
+          {% endcase %}
         {% endfor %}
       {% endif %}
     </div>
@@ -73,6 +80,23 @@
         "id": "text",
         "label": "文本/正文内容",
         "default": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+      }
+    ]
+  }, {
+    "type": "banner",
+    "name": "横幅/Banner",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "背景图片/Background image"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "按钮文字/Button label",
+        "default": "了解更多"
       }
     ]
   }],
