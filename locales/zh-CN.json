@@ -307,5 +307,9 @@
       "success_moderated": "评论已发布，等待审核",
       "success": "评论已发布"
     }
+  },
+  "demo_landing": {
+    "heading": "演示落地页",
+    "empty_state": "当前还没有卡片，请在主题编辑器中添加一些 block。"
   }
 }

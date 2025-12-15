@@ -1,0 +1,98 @@
+{% comment %} 
+  一个最小的 section，用来展示 block 里的内容
+    - 有 section 级别的设置（标题、背景色）
+    - 有可重复的 blocks（每个 block 一张卡片）
+{% endcomment %}
+
+<section class="demo-landing-section" style="background: {{ section.settings.background_color }};">
+  <div class="page-width">
+    {% comment %} 标题使用多语言 key demo_landing.heading {% endcomment %}
+    {%# locales 中配置 %}
+    <h1>
+      {{ 'demo_landing.heading' | t }}
+    </h1>
+    {% comment %} show sub title {% endcomment %}
+    {% if section.settings.show_subtitle %}
+      <p class="demo-langding-section__subtitle">
+        {{ section.settings.subtitle |  default: 'This is a custom static landing page.' }}
+      </p>
+    {% endif %}
+
+    {% comment %} card {% endcomment %}
+    <div class="demo-landing-section__cards">
+      {% if section.blocks.size == 0 %}
+        <p>{{ 'demo_landing.empty_state' | t }}</p>
+      {% else  %}
+        {% for block in section.blocks %}
+          {% render 'demo-landing', title: block.settings.title, text: block.settings.text %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Demo Landing Section",
+  "tag": "section",
+  "class": "section demo-landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题/Subtitle",
+      "default": "这是一个自定义静态落地页（Demo）。"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景色/Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subtitle",
+      "label": "显示副标题/Show Subtitle",
+      "default": true
+    }
+  ],
+  "blocks": [{
+    "type": "card",
+    "name": "卡片/Card",
+    "limit": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "标题/Title",
+        "default": "卡片标题"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "文本/正文内容",
+        "default": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+      }
+    ]
+  }],
+  "presets": [{
+    "name": "Demo Landing Section",
+    "category": "Custom"
+  }]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .demo-landing-section {
+    padding: 40px 0;
+  }
+  .demo-landing-section__subtitle {
+    margin-bottom: 24px;
+    color: #666;
+  }
+  .demo-landing-section__cards {
+    display: grid;
+    gap: 16px;
+  }
+{% endstylesheet %}

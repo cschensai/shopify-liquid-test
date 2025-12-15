@@ -325,5 +325,9 @@
       "quantity_maximum": "Maximum of {{ maximum }}",
       "in_cart": "in cart"
     }
+  },
+  "demo_landing": {
+    "heading": "Demo Landing Page",
+    "empty_state": "No cards yet. Please add some blocks in the theme editor."
   }
 }

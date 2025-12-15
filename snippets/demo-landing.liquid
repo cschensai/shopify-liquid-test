@@ -1,0 +1,25 @@
+{% comment %} 
+    一个最小的卡片 snippet，用来展示 block 里的内容
+    传入参数：
+      - title
+      - text
+{% endcomment %}
+
+
+<div class="demo-card">
+  {% if title %}
+    <h3 class="demo-card__title">{{ title }}</h3>
+  {% endif %}
+  {% if text %}
+    <p class="demo-card__text">{{ text }}</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .demo-card__title {
+    font-weight: 600;
+  }
+  .demo-card__text {
+    margin: 0;
+  }
+{% endstylesheet %}

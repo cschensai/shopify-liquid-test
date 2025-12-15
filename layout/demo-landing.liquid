@@ -1,0 +1,18 @@
+{% comment %} 后面我们创建的 template/section/snippet，最后都会通过 {{ content_for_layout }} 渲染出来，所以这一块就是“页面的外框布局（layout） {% endcomment %}
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code   }}">
+
+<head>
+  {{ content_for_header }}
+</head>
+
+<body>
+  {% section 'header' %}
+  <main id="MainContent">
+    {% comment %} 我们自定义页面的内容最终会被插入到这里 {% endcomment %}
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+</body>
+
+</html>
