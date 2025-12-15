@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "logo_height": 36,
+    "logo_height_mobile": 28,
     "type_body_font": "inter_n4",
     "type_subheading_font": "inter_n5",
     "type_heading_font": "inter_n7",
@@ -74,6 +76,72 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "sections": {
+      "demo-landing": {
+        "type": "demo-landing",
+        "blocks": {
+          "card_UhyaQ4": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_KKUAwN": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_hKjwkU": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_XKkJyq": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_ydzNdb": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_9VjRMa": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题1",
+              "text": "第一个-在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          }
+        },
+        "block_order": [
+          "card_UhyaQ4",
+          "card_KKUAwN",
+          "card_hKjwkU",
+          "card_XKkJyq",
+          "card_ydzNdb",
+          "card_9VjRMa"
+        ],
+        "custom_css": [
+          "h1 {color: green;}"
+        ],
+        "settings": {
+          "subtitle": "这是一个自定义静态落地页（Demo）。",
+          "background_color": "#dec2c2",
+          "show_subtitle": true
+        }
+      }
+    },
+    "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -121,7 +189,7 @@
           "foreground": "#000000cf",
           "primary": "#000000cf",
           "primary_hover": "#ffffff",
-          "border": "#DFDFDF",
+          "border": "#dfdfdf",
           "shadow": "#000000",
           "primary_button_background": "#000000",
           "primary_button_text": "#ffffff",
@@ -348,9 +416,7 @@
           "selected_variant_hover_border_color": "#1a1a1a"
         }
       }
-    },
-    "logo_height": 36,
-    "logo_height_mobile": 28
+    }
   },
   "presets": {
     "Horizon": {
