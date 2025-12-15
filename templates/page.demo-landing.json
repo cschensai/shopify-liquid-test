@@ -1,25 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "Demo Landing Page",
   "sections": {
     "main": {
       "type": "demo-landing",
-      "settings": {
-        "subtitle": "这是在模板里配置的默认副标题（可以在编辑器里改）。",
-        "background_color": "#f7f7f7",
-        "show_subtitle": true
-      },
       "blocks": {
         "card-1": {
           "type": "card",
           "settings": {
-            "heading": "第一张卡片",
             "text": "这是通过模板预设的第一张卡片内容。"
           }
         },
         "card-2": {
           "type": "card",
           "settings": {
-            "heading": "第二张卡片",
             "text": "你可以在主题编辑器中继续添加更多卡片 block。"
           }
         }
@@ -27,7 +28,12 @@
       "block_order": [
         "card-1",
         "card-2"
-      ]
+      ],
+      "settings": {
+        "subtitle": "这是在模板里配置的默认副标题（可以在编辑器里改）。",
+        "background_color": "#f7f7f7",
+        "show_subtitle": true
+      }
     }
   },
   "order": [
