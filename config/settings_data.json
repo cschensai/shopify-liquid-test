@@ -80,6 +80,41 @@
       "demo-landing": {
         "type": "demo-landing",
         "blocks": {
+          "card_UhyaQ4": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_KKUAwN": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_hKjwkU": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_XKkJyq": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
+          "card_ydzNdb": {
+            "type": "card",
+            "settings": {
+              "title": "卡片标题",
+              "text": "在这里可以写一些介绍性的文字，用来演示 block 的用法。"
+            }
+          },
           "card_9VjRMa": {
             "type": "card",
             "settings": {
@@ -89,6 +124,11 @@
           }
         },
         "block_order": [
+          "card_UhyaQ4",
+          "card_KKUAwN",
+          "card_hKjwkU",
+          "card_XKkJyq",
+          "card_ydzNdb",
           "card_9VjRMa"
         ],
         "custom_css": [
@@ -96,7 +136,7 @@
         ],
         "settings": {
           "subtitle": "这是一个自定义静态落地页（Demo）。",
-          "background_color": "#ab2929",
+          "background_color": "#dec2c2",
           "show_subtitle": true
         }
       }
