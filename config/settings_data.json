@@ -80,6 +80,13 @@
       "demo-landing": {
         "type": "demo-landing",
         "blocks": {
+          "banner_PN6Gqx": {
+            "type": "banner",
+            "settings": {
+              "image": "{{ metaobjects.cs_home[\"cs-home-meta-fields\"].cs_banner.value }}",
+              "button_label": "了解更多"
+            }
+          },
           "card_UhyaQ4": {
             "type": "card",
             "settings": {
@@ -124,6 +131,7 @@
           }
         },
         "block_order": [
+          "banner_PN6Gqx",
           "card_UhyaQ4",
           "card_KKUAwN",
           "card_hKjwkU",
